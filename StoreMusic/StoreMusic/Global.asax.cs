@@ -1,7 +1,7 @@
-﻿using StoreMusic.Migrations;
-using StoreMusic.Models;
+﻿using StoreMusic.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -14,7 +14,7 @@ namespace StoreMusic
     {
         protected void Application_Start()
         {
-            //System.Data.Entity.Database.SetInitializer(new DataInit());
+            //System.Data.Entity.Database.SetInitializer(new Configuration());
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

@@ -9,21 +9,16 @@ namespace StoreMusic.Controllers
 {
     public class HomeController : Controller
     {
-        StoreMusicContext storeDB = new StoreMusicContext();
+        private StoreMusicContext storeDB;
 
+        public HomeController()
+        {
+            storeDB = new StoreMusicContext();
+        }
         public ActionResult Index()
         {
-            //var albums = GetTopSellingAlbums(5);
             var albums = storeDB.Albums.ToList();
             return View(albums);
-        }
-
-       private List<Album> GetTopSellingAlbums(int count)
-        {
-            return storeDB.Albums
-                    .OrderByDescending(a => a.OrderDetails.Count())
-                    .Take(count)
-                    .ToList();
         }
 
         public ActionResult About()

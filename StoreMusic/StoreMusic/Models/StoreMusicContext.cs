@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using System.Configuration;
 
 namespace StoreMusic.Models
 {
@@ -20,11 +21,11 @@ namespace StoreMusic.Models
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+       protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            Database.SetInitializer(new DataInit());
+            //Database.SetInitializer(new DataInit());
         }
-
+        
     }
 }

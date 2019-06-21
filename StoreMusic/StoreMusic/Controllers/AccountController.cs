@@ -12,14 +12,12 @@ namespace StoreMusic.Controllers
     {
         private void MigrateShoppingCart(string UserName)
         {
-            // Associate shopping cart items with logged-in user
             var cart = ShoppingCart.GetCart(this.HttpContext);
 
             cart.MigrateCart(UserName);
             Session[ShoppingCart.CartSessionKey] = UserName;
         }
 
-        //
         // GET: /Account/LogOn
 
         public ActionResult LogOn()
@@ -27,7 +25,6 @@ namespace StoreMusic.Controllers
             return View();
         }
 
-        //
         // POST: /Account/LogOn
 
         [HttpPost]
@@ -149,7 +146,6 @@ namespace StoreMusic.Controllers
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 

@@ -42,18 +42,11 @@ namespace StoreMusic.Controllers
         }
 
         // GET: Store/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Genre genre = db.Genres.Find(id);
-            if (genre == null)
-            {
-                return HttpNotFound();
-            }
-            return View(genre);
+            var album = db.Albums.Find(id);
+
+            return View(album);
         }
 
         // GET: Store/Create
@@ -63,8 +56,6 @@ namespace StoreMusic.Controllers
         }
 
         // POST: Store/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "GenreId,Name,Description")] Genre genre)
@@ -95,8 +86,7 @@ namespace StoreMusic.Controllers
         }
 
         // POST: Store/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "GenreId,Name,Description")] Genre genre)

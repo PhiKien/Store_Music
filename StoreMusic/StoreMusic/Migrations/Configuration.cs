@@ -436,7 +436,6 @@ namespace StoreMusic.Migrations
                 new Album { Title = "Ao Vivo [IMPORT]", Genre = genres.Single(g => g.Name == "Latin"), Price = 8.99M, Artist = artists.Single(a => a.Name == "Zeca Pagodinho"), AlbumArtUrl = "/Content/Images/placeholder.gif" },
             }.ForEach(a => context.Albums.Add(a));
             context.SaveChanges();
-            base.Seed(context);
         }
     }
 }

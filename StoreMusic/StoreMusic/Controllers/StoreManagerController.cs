@@ -22,17 +22,9 @@ namespace StoreMusic.Controllers
         }
 
         // GET: StoreManager/Details/5
-        public ActionResult Details(int? id)
+        public ViewResult Details(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Album album = db.Albums.Find(id);
-            if (album == null)
-            {
-                return HttpNotFound();
-            }
             return View(album);
         }
 
@@ -46,7 +38,6 @@ namespace StoreMusic.Controllers
 
         // POST: StoreManager/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create(Album album)
         {
             if (ModelState.IsValid)
@@ -56,41 +47,33 @@ namespace StoreMusic.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name", album.ArtistId);
             ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", album.GenreId);
+            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name", album.ArtistId);
             return View(album);
         }
 
         // GET: StoreManager/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             Album album = db.Albums.Find(id);
-            if (album == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name", album.ArtistId);
             ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", album.GenreId);
+            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name", album.ArtistId);
             return View(album);
         }
 
         // POST: StoreManager/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(Album album)
+        public ActionResult Edit(Album album, int id)
         {
             if (ModelState.IsValid)
             {
+                album.AlbumId = id;
                 db.Entry(album).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name", album.ArtistId);
             ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "Name", album.GenreId);
+            ViewBag.ArtistId = new SelectList(db.Artists, "ArtistId", "Name", album.ArtistId);
             return View(album);
         }
 
