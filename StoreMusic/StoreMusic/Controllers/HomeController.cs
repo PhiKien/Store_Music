@@ -13,11 +13,12 @@ namespace StoreMusic.Controllers
 
         public ActionResult Index()
         {
-            var albums = GetTopSellingAlbums(5);
+            //var albums = GetTopSellingAlbums(5);
+            var albums = storeDB.Albums.ToList();
             return View(albums);
         }
 
-        private List<Album> GetTopSellingAlbums(int count)
+       private List<Album> GetTopSellingAlbums(int count)
         {
             return storeDB.Albums
                     .OrderByDescending(a => a.OrderDetails.Count())
